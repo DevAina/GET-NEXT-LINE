@@ -6,7 +6,7 @@
 /*   By: trarijam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:29:47 by trarijam          #+#    #+#             */
-/*   Updated: 2024/03/20 08:53:10 by trarijam         ###   ########.fr       */
+/*   Updated: 2024/04/05 11:37:54 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	read_and_stash(int fd, t_gnl_list *current, ssize_t	*nbytes_read)
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return ;
-	while (ft_read(fd, buf, nbytes_read) != 0)
+	while (ft_read(fd, buf, nbytes_read) > 0)
 	{
 		buf[*nbytes_read] = '\0';
 		if (current->stash)
@@ -111,7 +111,7 @@ char	*get_next_line(int fd)
 	ssize_t				nbytes_read;
 	char				*line;
 
-	if (fd == -1 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1)
+	if (fd == -1 || BUFFER_SIZE <= 0
 		return (NULL);
 	current = found_node_or_add_in_node(&head, fd);
 	if (!current)
